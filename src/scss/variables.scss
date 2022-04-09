@@ -1,0 +1,27 @@
+/*** Colors ***/
+$white: #fffffe;
+$black: #2b2c34;
+$purple: #6246ea;
+$purple-light: #d1d1e9;
+$red: #e45858;
+
+/*** Theme ***/
+$headline: $purple;
+$paragraph: $black;
+$primary: $purple;
+$primary-contrast: $white;
+$secondary: $purple-light;
+$secondary-contrast: $purple;
+$tertiary: $red;
+$tertiary-contrast: $white;
+
+/*** Border ***/
+$border-radius: 1rem;
+
+/*** Font ***/
+$font-size-sm: 1.4rem;
+$font-size-md: 1.6rem;
+
+/*** Spacing ***/
+$spacing-md: 1rem;
+$spacing-lg: 1.6rem;
