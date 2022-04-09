@@ -1,37 +1,39 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DEFAULT_CONFIG } from '@config/game.config';
+import { Card } from '@models/card.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardsPositionsService {
-  private cardsPositionsSubject$ = new BehaviorSubject<number[]>([]);
+  private cardsPositionsSubject$ = new BehaviorSubject<Card[]>([]);
 
-  get cardsPositions$(): Observable<number[]> {
+  get cardsPositions$(): Observable<Card[]> {
     return this.cardsPositionsSubject$.asObservable();
   }
 
   randomizeCards(): void {
-    const shuffledImages = this.getShuffledAllImages();
+    const shuffledCards = this.getShuffledCards();
     const quantityToShow = DEFAULT_CONFIG.quantityToShow;
-    const cardsToShow = this.generatePositionsToDisplay(shuffledImages, quantityToShow);
+    const cardsToShow = this.generatePositionsToDisplay(shuffledCards, quantityToShow);
 
     this.cardsPositionsSubject$.next(cardsToShow);
   }
 
-  private generatePositionsToDisplay(items: number[], quantityToShow: number): number[] {
-    const uniqueCards = items.slice(0, quantityToShow);
-    const duplicateCards = uniqueCards.concat(uniqueCards);
+  private generatePositionsToDisplay(items: Card[], quantityToShow: number): Card[] {
+    const firstsCardsToDisplay = items.slice(0, quantityToShow);
+    const duplicateCards = firstsCardsToDisplay.concat(firstsCardsToDisplay);
     return this.shuffle(duplicateCards);
   }
 
-  private getShuffledAllImages() {
-    const shuffledImages = Array.from({ length: DEFAULT_CONFIG.totalAvailableImages }, (_, index) => index + 1);
-    return this.shuffle(shuffledImages);
+  private getShuffledCards(): Card[] {
+    const length = DEFAULT_CONFIG.totalAvailableImages;
+    const shuffledCards: Card[] = Array.from({ length }, this.createNewCard);
+    return this.shuffle(shuffledCards);
   }
 
-  private shuffle(itemsToShuffle: number[]): number[] {
+  private shuffle(itemsToShuffle: Card[]): Card[] {
     const newItems = itemsToShuffle.slice();
 
     for (let i = newItems.length - 1; i > 0; i--) {
@@ -42,5 +44,13 @@ export class CardsPositionsService {
     }
 
     return newItems;
+  }
+
+  private createNewCard(_: any, index: number): Card {
+    return {
+      id: index + 1,
+      flipped: false,
+      success: false
+    };
   }
 }

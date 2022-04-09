@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DEFAULT_CONFIG } from '@config/game.config';
 import { CardsPositionsService } from '@services/cards-positions.service';
+import { Card } from '@models/card.model';
 
 @Component({
   selector: 'app-game',
@@ -10,7 +11,7 @@ import { CardsPositionsService } from '@services/cards-positions.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GameComponent {
-  cardsPositions$!: Observable<number[]>;
+  cardsPositions$!: Observable<Card[]>;
 
   constructor(private readonly cardsPositionsService: CardsPositionsService) { }
 
@@ -19,13 +20,13 @@ export class GameComponent {
     this.cardsPositionsService.randomizeCards();
   }
 
-  getCardBackStyle(card: number) {
+  getCardBackStyle(card: Card) {
     return {
-      'background-image': `url(${this.getImageUrl(card)})`
+      'background-image': `url(${this.getImageUrl(card.id)})`
     };
   }
 
-  private getImageUrl(card: number) {
-    return `${DEFAULT_CONFIG.coversFolder}/${card}.jpg`;
+  private getImageUrl(id: number) {
+    return `${DEFAULT_CONFIG.coversFolder}/${id}.jpg`;
   }
 }
