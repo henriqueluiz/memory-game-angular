@@ -1,1 +1,8 @@
-<p>game works!</p>
+<ul class="cards">
+  <li *ngFor="let card of (cardsPositions$ | async)" class="cards__item">
+    <app-card-flip>
+      <div cardFront class="cards__item--front"></div>
+      <div cardBack class="cards__item--back" [ngStyle]="getCardBackStyle(card)"></div>
+    </app-card-flip>
+  </li>
+</ul>
