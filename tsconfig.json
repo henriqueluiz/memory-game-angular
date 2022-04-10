@@ -26,7 +26,9 @@
       "@components/*": ["src/app/components/*"],
       "@config/*": ["src/app/config/*"],
       "@services/*": ["src/app/services/*"],
-      "@models/*": ["src/app/models/*"]
+      "@models/*": ["src/app/models/*"],
+      "@guards/*": ["src/app/guards/*"],
+      "@enums/*": ["src/app/enums/*"],
     }
   },
   "angularCompilerOptions": {
