@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { DEFAULT_CONFIG } from '@config/game.config';
 import { Card } from '@models/card.model';
+import { Routes } from '@enums/routes';
 import { CardsPositionsService } from './cards-positions.service';
 
 @Injectable({
@@ -9,10 +11,24 @@ import { CardsPositionsService } from './cards-positions.service';
 export class GameService {
   private readonly maxPendingCardsFlipped = 2;
 
-  constructor(private readonly positionsService: CardsPositionsService) { }
+  constructor(
+    private readonly positionsService: CardsPositionsService,
+    private readonly router: Router
+  ) { }
 
   setFlipped(index: number): void {
     this.flipCardByIndex(index);
+  }
+
+  resetGame(): void {
+    this.positionsService.randomizeCards();
+    this.router.navigate([Routes.HOME]);
+  }
+
+  isVictory(): boolean {
+    return this.positionsService.cardsPositions.length > 0
+      ? this.positionsService.cardsPositions.every(c => c.success)
+      : false;
   }
 
   private flipCardByIndex(index: number): void {
@@ -21,7 +37,7 @@ export class GameService {
     if (!canUpdate) return;
 
     this.positionsService.flipCardByIndex(index);
-    this.verifyVictory();
+    this.verifyMove();
   }
 
   private canUpdate(): boolean {
@@ -29,16 +45,16 @@ export class GameService {
     return totalPendingCards < this.maxPendingCardsFlipped;
   }
 
-  private verifyVictory(): void {
+  private verifyMove(): void {
     const pendingCards = this.positionsService.getPendingCards();
     const canVerify = pendingCards.length === this.maxPendingCardsFlipped;
 
     if (!canVerify) return;
 
     const [cardOne, cardTwo] = pendingCards;
-    const isVictory = cardOne.id === cardTwo.id;
+    const isCorrectMove = cardOne.id === cardTwo.id;
 
-    if (isVictory) {
+    if (isCorrectMove) {
       this.successFlipCards(pendingCards);
     } else {
       this.resetFlipCards(pendingCards);
@@ -53,5 +69,16 @@ export class GameService {
 
   private successFlipCards(pendingCards: Card[]): void {
     this.positionsService.successFlipCards(pendingCards);
+    this.verifyVictory();
+  }
+
+  private verifyVictory() {
+    const isVictory = this.isVictory();
+
+    if (isVictory) {
+      setTimeout(() => {
+        this.router.navigate([Routes.VICTORY]);
+      }, DEFAULT_CONFIG.miliSecondsToAutoFlip / 2);
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ButtonModule } from '@components/button/button.module';
 import { VictoryRoutingModule } from './victory-routing.module';
 import { VictoryComponent } from './victory.component';
 
@@ -11,7 +12,8 @@ import { VictoryComponent } from './victory.component';
   ],
   imports: [
     CommonModule,
-    VictoryRoutingModule
+    VictoryRoutingModule,
+    ButtonModule
   ]
 })
 export class VictoryModule { }

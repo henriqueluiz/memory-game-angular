@@ -1,1 +1,10 @@
-<p>victory works!</p>
+<div class="victory">
+  <h1 class="victory__title">You Win!</h1>
+
+  <app-button
+    class="victory__button"
+    label="Play again"
+    [sizeClass]="buttonSize"
+    (btnClick)="resetGame()"
+  ></app-button>
+</div>
