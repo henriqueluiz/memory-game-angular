@@ -1,0 +1,32 @@
+@import 'variables';
+
+.btn {
+  all: unset;
+  cursor: pointer;
+  border-radius: $border-radius-sm;
+  transition: all 0.25s ease-in-out;
+
+  &--primary {
+    background-color: $primary;
+    color: $primary-contrast;
+  }
+
+  &--sm {
+    font-size: $font-size-sm;
+    padding: $spacing-sm;
+  }
+
+  &--md {
+    font-size: $font-size-md;
+    padding: $spacing-md;
+  }
+
+  &--lg {
+    font-size: $font-size-lg;
+    padding: $spacing-lg;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
