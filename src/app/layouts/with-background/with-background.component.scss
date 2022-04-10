@@ -5,7 +5,7 @@ $opacity-background: 0.7;
 .game {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +33,7 @@ $opacity-background: 0.7;
     z-index: 1;
     width: 100%;
     max-width: 90rem;
-    height: 90vh;
+    min-height: 90vh;
     background-color: $white;
     border-radius: $border-radius-md;
     padding: $spacing-lg;

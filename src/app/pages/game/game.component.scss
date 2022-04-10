@@ -49,3 +49,14 @@
     }
   }
 }
+
+@media (max-width: 60rem) {
+  .cards {
+    gap: $spacing-lg;
+  }
+
+  .cards__item {
+    width: 14rem;
+    height: 18rem;
+  }
+}
