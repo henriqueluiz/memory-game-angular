@@ -27,6 +27,9 @@ $opacity-background: 0.7;
 
   &__container {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     z-index: 1;
     width: 100%;
     max-width: 90rem;
@@ -36,4 +39,8 @@ $opacity-background: 0.7;
     padding: $spacing-lg;
     margin: $spacing-lg;
   }
+}
+
+header {
+  margin-bottom: $spacing-xl;
 }

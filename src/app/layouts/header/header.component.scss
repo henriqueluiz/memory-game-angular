@@ -1,0 +1,11 @@
+@import 'variables';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $secondary;
+  color: $secondary-contrast;
+  border-radius: $border-radius-md;
+  padding: $spacing-lg $spacing-xl;
+}

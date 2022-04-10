@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HeaderModule } from './../header/header.module';
+import { FooterModule } from './../footer/footer.module';
 import { WithBackgroundComponent } from './with-background.component';
 
 
@@ -11,7 +13,9 @@ import { WithBackgroundComponent } from './with-background.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    HeaderModule,
+    FooterModule
   ]
 })
 export class WithBackGroundModule { }

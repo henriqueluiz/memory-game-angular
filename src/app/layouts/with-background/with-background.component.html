@@ -1,6 +1,14 @@
 <div class="game">
   <div class="game__background" aria-hidden="true"></div>
   <div class="game__container">
-    <router-outlet></router-outlet>
+    <div class="game__content">
+      <header>
+        <app-header></app-header>
+      </header>
+      <router-outlet></router-outlet>
+    </div>
+    <footer>
+      <app-footer></app-footer>
+    </footer>
   </div>
 </div>
