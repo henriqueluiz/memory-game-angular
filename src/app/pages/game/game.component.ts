@@ -29,11 +29,15 @@ export class GameComponent {
   }
 
   getCardBackStyle(card: Card) {
-    const backgroundImage = card.flipped ? `url(${this.getImageUrl(card.id)})` : 'none';
+    const backgroundImage = `url(${this.getImageUrl(card.id)})`;
 
     return {
       'background-image': backgroundImage
     };
+  }
+
+  trackByCardId(index: number, item: Card){
+    return item.id;
   }
 
   private getImageUrl(id: number) {

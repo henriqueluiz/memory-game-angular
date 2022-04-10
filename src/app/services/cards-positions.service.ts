@@ -39,7 +39,7 @@ export class CardsPositionsService {
     return this.cardsPositions.filter(this.isPending);
   }
 
-  resetFlipCards(cardsToUpdate: Card[]) {
+  resetFlipCards(cardsToUpdate: Card[]): void {
     const card: CardFlipState = {
       flipped: false,
       success: false
@@ -48,7 +48,7 @@ export class CardsPositionsService {
     this.bulkUpdate(cardsToUpdate, card);
   }
 
-  successFlipCards(cardsToUpdate: Card[]) {
+  successFlipCards(cardsToUpdate: Card[]): void {
     const card: CardFlipState = {
       flipped: true,
       success: true
@@ -57,7 +57,7 @@ export class CardsPositionsService {
     this.bulkUpdate(cardsToUpdate, card);
   }
 
-  private bulkUpdate(cardsToUpdate: Card[], card: CardFlipState) {
+  private bulkUpdate(cardsToUpdate: Card[], card: CardFlipState): void {
     const ids = cardsToUpdate.map(c => c.id);
     const cards = this.cardsPositions.slice();
 
@@ -102,7 +102,7 @@ export class CardsPositionsService {
     return newItems;
   }
 
-  private isPending(card: Card) {
+  private isPending(card: Card): boolean {
     return card.flipped === true && card.success === false;
   }
 

@@ -45,13 +45,13 @@ export class GameService {
     }
   }
 
-  private resetFlipCards(pendingCards: Card[]) {
+  private resetFlipCards(pendingCards: Card[]): void {
     setTimeout(() => {
       this.positionsService.resetFlipCards(pendingCards);
     }, DEFAULT_CONFIG.miliSecondsToAutoFlip);
   }
 
-  private successFlipCards(pendingCards: Card[]) {
+  private successFlipCards(pendingCards: Card[]): void {
     this.positionsService.successFlipCards(pendingCards);
   }
 }

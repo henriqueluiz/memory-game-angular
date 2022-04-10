@@ -1,41 +1,27 @@
 .card-flip {
-  background-color: transparent;
+  display: block;
   width: 100%;
   height: 100%;
-  perspective: 500rem;
-  cursor: pointer;
+  perspective: 60rem;
 
   &__container {
     position: relative;
+    transform-style: preserve-3d;
+    cursor: pointer;
     width: 100%;
     height: 100%;
-    transition: transform 0.8s;
-    // transform-style: preserve-3d;
   }
 
   &--front,
   &--back {
+    display: block;
     position: absolute;
     width: 100%;
     height: 100%;
-    // backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   &--back {
-    // transform: rotateY(180deg);
-  }
-
-  // &:hover &__container {
-  //   transform: rotateY(180deg);
-  // }
-
-  &--hidden {
-    display: none;
+    transform: rotateY(180deg);
   }
 }
-
-.rotate {
-  transform: rotateY(180deg);
-}
-
-

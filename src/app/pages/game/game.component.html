@@ -1,5 +1,8 @@
 <ul class="cards">
-  <li *ngFor="let card of (cardsPositions$ | async); let index = index" class="cards__item">
+  <li
+    *ngFor="let card of (cardsPositions$ | async); let index = index; trackBy:trackByCardId"
+    class="cards__item"
+  >
     <app-card-flip [showBack]="card.flipped">
       <div cardFront class="cards__item--front" (click)="setFlipped(index)"></div>
       <div cardBack class="cards__item--back" [ngStyle]="getCardBackStyle(card)"></div>

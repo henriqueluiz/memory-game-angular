@@ -1,9 +1,9 @@
 <div class="card-flip">
-  <div class="card-flip__container">
-    <div [class.card-flip--hidden]="showBack" class="card-flip--front">
+  <div class="card-flip__container" [@cardFlip]="animationState">
+    <div class="card-flip--front">
       <ng-content select="[cardFront]"></ng-content>
     </div>
-    <div [class.card-flip--hidden]="!showBack" class="card-flip--back">
+    <div class="card-flip--back">
       <ng-content select="[cardBack]"></ng-content>
     </div>
   </div>
