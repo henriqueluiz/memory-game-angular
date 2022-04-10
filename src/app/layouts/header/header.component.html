@@ -1,7 +1,7 @@
 <div class="header">
   <div class="header__count">
-    <div><b>Victories:</b> 0</div>
-    <div><b>Errors:</b> 1</div>
+    <div><b>Victories:</b> {{ victoryCount$ | async }}</div>
+    <div><b>Errors:</b> {{ errorCount$ | async }}</div>
   </div>
 
   <div class="header__action">

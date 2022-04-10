@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { GameService } from '@services/game.service';
 
 @Component({
@@ -7,10 +8,18 @@ import { GameService } from '@services/game.service';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  victoryCount$!: Observable<number>;
+  errorCount$!: Observable<number>;
+
   constructor(private readonly gameService: GameService) { }
 
-  resetGame() {
+  ngOnInit(): void {
+    this.victoryCount$ = this.gameService.victoryCount$;
+    this.errorCount$ = this.gameService.errorCount$;
+  }
+
+  resetGame(): void {
     this.gameService.resetGame();
   }
 }

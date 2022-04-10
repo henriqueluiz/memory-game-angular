@@ -1,3 +1,4 @@
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DEFAULT_CONFIG } from '@config/game.config';
@@ -10,11 +11,21 @@ import { CardsPositionsService } from './cards-positions.service';
 })
 export class GameService {
   private readonly maxPendingCardsFlipped = 2;
+  private victoryCountSubject$ = new BehaviorSubject<number>(0);
+  private errorCountSubject$ = new BehaviorSubject<number>(0);
 
   constructor(
     private readonly positionsService: CardsPositionsService,
     private readonly router: Router
   ) { }
+
+  get victoryCount$(): Observable<number> {
+    return this.victoryCountSubject$.asObservable();
+  }
+
+  get errorCount$(): Observable<number> {
+    return this.errorCountSubject$.asObservable();
+  }
 
   setFlipped(index: number): void {
     this.flipCardByIndex(index);
@@ -22,6 +33,7 @@ export class GameService {
 
   resetGame(): void {
     this.positionsService.randomizeCards();
+    this.resetErrorCount();
     this.router.navigate([Routes.HOME]);
   }
 
@@ -64,6 +76,7 @@ export class GameService {
   private resetFlipCards(pendingCards: Card[]): void {
     setTimeout(() => {
       this.positionsService.resetFlipCards(pendingCards);
+      this.incrementErrorCount();
     }, DEFAULT_CONFIG.miliSecondsToAutoFlip);
   }
 
@@ -76,9 +89,32 @@ export class GameService {
     const isVictory = this.isVictory();
 
     if (isVictory) {
-      setTimeout(() => {
-        this.router.navigate([Routes.VICTORY]);
-      }, DEFAULT_CONFIG.miliSecondsToAutoFlip / 2);
+      this.redirectToVictoryPage();
     }
+  }
+
+  private redirectToVictoryPage() {
+    setTimeout(() => {
+      this.incrementVictoryCount();
+      this.router.navigate([Routes.VICTORY]);
+    }, DEFAULT_CONFIG.miliSecondsToAutoFlip / 2);
+  }
+
+  private resetErrorCount() {
+    this.errorCountSubject$.next(0);
+  }
+
+  private incrementErrorCount() {
+    const errors = this.errorCountSubject$.value;
+    const increment = errors + 1;
+
+    this.errorCountSubject$.next(increment);
+  }
+
+  private incrementVictoryCount() {
+    const victories = this.victoryCountSubject$.value;
+    const increment = victories + 1;
+
+    this.victoryCountSubject$.next(increment);
   }
 }
