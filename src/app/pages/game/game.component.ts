@@ -41,6 +41,6 @@ export class GameComponent {
   }
 
   private getImageUrl(id: number) {
-    return `${DEFAULT_CONFIG.coversFolder}/${id}.jpg`;
+    return `${DEFAULT_CONFIG.imagesFolder}/${id}.jpg`;
   }
 }
