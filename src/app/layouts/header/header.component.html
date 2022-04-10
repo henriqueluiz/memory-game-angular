@@ -5,6 +5,13 @@
   </div>
 
   <div class="header__action">
-    <button (click)="resetGame()">reset</button>
+    <a
+      class="header__action__link-reset"
+      title="Reset"
+      aria-label="Reset game"
+      (click)="resetGame()"
+    >
+      <icon-refresh></icon-refresh>
+    </a>
   </div>
 </div>

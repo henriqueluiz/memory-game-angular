@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
+import { RefreshIconModule } from '@icons/refresh/refresh.module';
 
 
 
@@ -9,7 +10,8 @@ import { HeaderComponent } from './header.component';
     HeaderComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RefreshIconModule
   ],
   exports: [
     HeaderComponent

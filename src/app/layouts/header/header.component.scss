@@ -8,4 +8,9 @@
   color: $secondary-contrast;
   border-radius: $border-radius-md;
   padding: $spacing-lg $spacing-xl;
+
+  &__action__link-reset {
+    color: inherit;
+    cursor: pointer;
+  }
 }

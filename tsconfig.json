@@ -29,6 +29,7 @@
       "@models/*": ["src/app/models/*"],
       "@guards/*": ["src/app/guards/*"],
       "@enums/*": ["src/app/enums/*"],
+      "@icons/*": ["src/app/icons/*"],
     }
   },
   "angularCompilerOptions": {

@@ -1,8 +1,17 @@
 @import 'variables';
 
-:host {
+.footer-content {
   display: flex;
   justify-content: center;
   align-items: center;
   color: $primary;
+
+  &__author-name {
+    margin-right: $spacing-md;
+  }
+
+  &__link-project {
+    color: inherit;
+    line-height: 0;
+  }
 }
