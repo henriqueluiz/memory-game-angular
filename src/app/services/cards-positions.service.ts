@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DEFAULT_CONFIG } from '@config/game.config';
-import { Card } from '@models/card.model';
+import { Card, CardFlipState } from '@models/card.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +13,68 @@ export class CardsPositionsService {
     return this.cardsPositionsSubject$.asObservable();
   }
 
+  get cardsPositions(): Card[] {
+    return this.cardsPositionsSubject$.value;
+  }
+
   randomizeCards(): void {
     const shuffledCards = this.getShuffledCards();
     const quantityToShow = DEFAULT_CONFIG.quantityToShow;
     const cardsToShow = this.generatePositionsToDisplay(shuffledCards, quantityToShow);
 
-    this.cardsPositionsSubject$.next(cardsToShow);
+    this.updateCardsPositionsSubject(cardsToShow);
+  }
+
+  flipCardByIndex(index: number): void {
+    const cards = this.cardsPositions.slice();
+    cards[index] = {
+      ...cards[index],
+      flipped: true
+    };
+
+    this.updateCardsPositionsSubject(cards);
+  }
+
+  getPendingCards(): Card[] {
+    return this.cardsPositions.filter(this.isPending);
+  }
+
+  resetFlipCards(cardsToUpdate: Card[]) {
+    const card: CardFlipState = {
+      flipped: false,
+      success: false
+    };
+
+    this.bulkUpdate(cardsToUpdate, card);
+  }
+
+  successFlipCards(cardsToUpdate: Card[]) {
+    const card: CardFlipState = {
+      flipped: true,
+      success: true
+    };
+
+    this.bulkUpdate(cardsToUpdate, card);
+  }
+
+  private bulkUpdate(cardsToUpdate: Card[], card: CardFlipState) {
+    const ids = cardsToUpdate.map(c => c.id);
+    const cards = this.cardsPositions.slice();
+
+    ids.forEach(id => {
+      const index = cards.findIndex(c => c.id === id && this.isPending(c));
+      cards[index] = {
+        ...cards[index],
+        flipped: card.flipped,
+        success: card.success
+      };
+    });
+
+    this.updateCardsPositionsSubject(cards);
+  }
+
+  private updateCardsPositionsSubject(cards: Card[]): void {
+    this.cardsPositionsSubject$.next(cards);
   }
 
   private generatePositionsToDisplay(items: Card[], quantityToShow: number): Card[] {
@@ -44,6 +100,10 @@ export class CardsPositionsService {
     }
 
     return newItems;
+  }
+
+  private isPending(card: Card) {
+    return card.flipped === true && card.success === false;
   }
 
   private createNewCard(_: any, index: number): Card {

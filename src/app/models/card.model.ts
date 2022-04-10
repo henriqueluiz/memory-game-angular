@@ -3,3 +3,5 @@ export interface Card {
   flipped: boolean;
   success: boolean;
 }
+
+export type CardFlipState = Pick<Card, 'flipped' | 'success'>;
