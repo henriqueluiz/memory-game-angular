@@ -36,7 +36,7 @@ export class GameComponent {
     };
   }
 
-  trackByCardId(index: number, item: Card){
+  trackByCardId(_: number, item: Card) {
     return item.id;
   }
 

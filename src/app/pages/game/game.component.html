@@ -3,7 +3,13 @@
     *ngFor="let card of (cardsPositions$ | async); let index = index; trackBy:trackByCardId"
     class="cards__item"
   >
-    <div class="cards__item__wrapper">
+    <div
+      class="cards__item__checkbox"
+      role="checkbox"
+      tabindex="0"
+      attr.aria-checked="{{ card.flipped }}"
+      (keyup.space)="setFlipped(index)"
+    >
       <app-card-flip [showBack]="card.flipped">
         <div cardFront class="cards__item__front" (click)="setFlipped(index)"></div>
         <div cardBack class="cards__item__back" [ngStyle]="getCardBackStyle(card)"></div>

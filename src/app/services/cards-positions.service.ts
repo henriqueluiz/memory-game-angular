@@ -39,6 +39,10 @@ export class CardsPositionsService {
     return this.cardsPositions.filter(this.isPending);
   }
 
+  isPending(card: Card): boolean {
+    return card.flipped === true && card.success === false;
+  }
+
   resetFlipCards(cardsToUpdate: Card[]): void {
     const card: CardFlipState = {
       flipped: false,
@@ -100,10 +104,6 @@ export class CardsPositionsService {
     }
 
     return newItems;
-  }
-
-  private isPending(card: Card): boolean {
-    return card.flipped === true && card.success === false;
   }
 
   private createNewCard(_: any, index: number): Card {
