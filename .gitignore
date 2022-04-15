@@ -43,3 +43,7 @@ Thumbs.db
 
 # Personal Files
 TO-DO.md
+
+# Cypress Artifacts
+cypress/screenshots
+cypress/videos
