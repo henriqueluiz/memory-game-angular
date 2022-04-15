@@ -10,16 +10,20 @@
     width: 15rem;
     height: 20.8rem;
     border-radius: $border-radius-md;
-    overflow: hidden;
 
-    &--front,
-    &--back {
+    &__wrapper {
+      width: 100%;
+      height: 100%;
+    }
+
+    &__front,
+    &__back {
       width: 100%;
       height: 100%;
       border-radius: $border-radius-md;
     }
 
-    &--front {
+    &__front {
       &:before,
       &:after {
         content: "";
@@ -43,9 +47,17 @@
       }
     }
 
-    &--back {
+    &__back {
       background-repeat: no-repeat;
       background-size: cover;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 0.3rem $primary;
     }
   }
 }
@@ -53,10 +65,10 @@
 @media (max-width: 60rem) {
   .cards {
     gap: $spacing-lg;
-  }
 
-  .cards__item {
-    width: 14rem;
-    height: 18rem;
+    &__item {
+      width: 14rem;
+      height: 18rem;
+    }
   }
 }
