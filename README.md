@@ -11,3 +11,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Test e2e
+
+`npm run cypress:open` or `npm run cypress:run` if you use WSL2, check [official documentation](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) to configure your environment.
