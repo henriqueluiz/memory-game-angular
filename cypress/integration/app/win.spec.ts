@@ -12,6 +12,6 @@ describe('Win game', () => {
   it('should show incremented status', () => {
     VictoryPage.title().contains('You Win!');
     VictoryPage.victories().contains('Victories: 2');
-    VictoryPage.errors().contains('Errors: 0');
+    VictoryPage.errors().contains('Errors: 1');
   });
 });
